@@ -1,7 +1,6 @@
 import random
 import os
 import time
-import sys
 
 def drawer(errorcounter):
     ec = errorcounter
@@ -56,6 +55,10 @@ def drawer(errorcounter):
         print("-")
 
 def wordSelector():
+        if not os.path.exists('words.txt'):
+            print("File words.txt does not exist in working directory!")
+            time.sleep(3)
+            os.system('exit')
         file = open(r'C:\Users\passa_000\Desktop\words.txt')
         words = file.readlines()
         myword = random.choice(words)
