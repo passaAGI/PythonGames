@@ -82,13 +82,14 @@ def showLetter(lista, hiddenans, letter):
             lista3.append(i)
     lista3.append(lista[-1])
     return(lista3)
- 
+
 def main():
         flag = True
         errorcounter = 0
         attempt = ""
         letter = ""
         lista = []
+        misses = []
         print("*********")
         print("*Hangman*")
         print("*********\n")
@@ -105,6 +106,8 @@ def main():
             os.system('cls')
             drawer(errorcounter)
             print(hiddenans)
+            misses.sort()
+            print("Misses:", misses)
             a_or_l = input("Attempt or letter? [A][L] ")
             a_or_l = a_or_l.upper()
             if(a_or_l == "A"):
@@ -119,11 +122,12 @@ def main():
                     errorcounter += 1
             elif(a_or_l == "L"):
                 letter = input("Letter: ")
-                if(((letter == lista[0]) and (letter in lista[:1])) or ((letter == lista[-1]) and (letter in lista[:-1]))):
+                if(((letter == lista[0]) and (letter in lista[:1])) or ((letter == lista[-1]) and (letter in lista[:-1])) or (letter in misses)):
                     print("This letter is already shown!")
                 elif(letter not in lista):
                     print("Wrong")
                     errorcounter += 1
+                    misses.append(letter)
                 elif(letter in lista):
                     print("Right!")
                     hiddenans = showLetter(lista, hiddenans, letter)
